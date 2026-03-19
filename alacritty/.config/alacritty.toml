@@ -1,0 +1,15 @@
+[general]
+import = ["/home/jbryan/.config/alacritty/alacritty-colors.toml"]
+
+[font]
+size = 12
+
+[font.normal]
+family = "JetBrainsMono NF"
+
+[window]
+opacity = 0.5
+
+[env]
+COLORTERM = "truecolor"
+

@@ -1,0 +1,9 @@
+{
+    "boojeebot_dev": {
+        "DATA_PATH": "/home/jbryan/.local/share/Red-DiscordBot/data/boojeebot_dev",
+        "COG_PATH_APPEND": "cogs",
+        "CORE_PATH_APPEND": "core",
+        "STORAGE_TYPE": "JSON",
+        "STORAGE_DETAILS": {}
+    }
+}
