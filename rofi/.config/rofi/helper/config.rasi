@@ -1,43 +1,56 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
 configuration {
-    modi:                       "drun";
+	modi:                       "drun,run,filebrowser";
     show-icons:                 false;
-    display-drun:               " ";
+    display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
     display-window:             "";
-    drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    window-format:              "{w} · {c} · {t}";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w} · {c} · {t}";
 }
 
-@import "rofi-colors.rasi"
+/*****----- Global Properties -----*****/
+@import	 "colors/ef-trio-dark.rasi"
 
 * {
-    border-colour:               var(primary);
-    handle-colour:               var(primary);
+    border-colour:               var(selected);
+    handle-colour:               var(selected);
     background-colour:           var(background);
-    foreground-colour:           var(on-surface);
-    alternate-background:        var(surface-container);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(background-alt);
     normal-background:           var(background);
-    normal-foreground:           var(on-surface);
-    urgent-background:           var(error);
-    urgent-foreground:           var(on-error);
-    active-background:           var(tertiary);
-    active-foreground:           var(on-tertiary);
-    selected-normal-background:  var(primary);
-    selected-normal-foreground:  var(on-primary);
-    selected-urgent-background:  var(tertiary);
-    selected-urgent-foreground:  var(on-tertiary);
-    selected-active-background:  var(error);
-    selected-active-foreground:  var(on-error);
+    normal-foreground:           var(foreground);
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+    active-background:           var(active);
+    active-foreground:           var(background);
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(selected-fg);
+    selected-urgent-background:  var(active);
+    selected-urgent-foreground:  var(background);
+    selected-active-background:  var(urgent);
+    selected-active-foreground:  var(background);
     alternate-normal-background: var(background);
-    alternate-normal-foreground: var(on-surface);
-    alternate-urgent-background: var(error);
-    alternate-urgent-foreground: var(on-error);
-    alternate-active-background: var(tertiary);
-    alternate-active-foreground: var(on-tertiary);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(urgent);
+    alternate-urgent-foreground: var(background);
+    alternate-active-background: var(active);
+    alternate-active-foreground: var(background);
 }
 
+/*****----- Main Window -----*****/
 window {
+    /* properties for window widget */
     transparency:                "real";
     location:                    center;
     anchor:                      center;
@@ -45,7 +58,8 @@ window {
     width:                       600px;
     x-offset:                    0px;
     y-offset:                    0px;
-    font:                        "JetBrainsMono Nerd Font 12";
+
+    /* properties for all widgets */
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
@@ -56,6 +70,7 @@ window {
     background-color:            @background-colour;
 }
 
+/*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
     spacing:                     10px;
@@ -68,6 +83,7 @@ mainbox {
     children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
 }
 
+/*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
     spacing:                     10px;
@@ -102,9 +118,10 @@ entry {
     placeholder-color:           inherit;
 }
 
+/*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     1;
+    columns:                     2;
     lines:                       8;
     cycle:                       true;
     dynamic:                     true;
@@ -113,7 +130,7 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-
+    
     spacing:                     0px;
     margin:                      0px;
     padding:                     0px;
@@ -125,12 +142,13 @@ listview {
     cursor:                      "default";
 }
 scrollbar {
-    handle-width:                5px;
+    handle-width:                5px ;
     handle-color:                @handle-colour;
     border-radius:               0px;
     background-color:            @alternate-background;
 }
 
+/*****----- Elements -----*****/
 element {
     enabled:                     true;
     spacing:                     10px;
@@ -194,7 +212,8 @@ element-text {
     horizontal-align:            0.0;
 }
 
-mode-switcher {
+/*****----- Mode Switcher -----*****/
+mode-switcher{
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
@@ -219,6 +238,7 @@ button selected {
     text-color:                  var(selected-normal-foreground);
 }
 
+/*****----- Message -----*****/
 message {
     enabled:                     true;
     margin:                      0px;

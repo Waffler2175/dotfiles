@@ -1,5 +1,5 @@
 {
-    "autoUpdate": true,
+    "autoUpdate": false,
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [],
@@ -8,7 +8,7 @@
         "matugen-discord.css"
     ],
     "enableReactDevtools": true,
-    "frameless": false,
+    "frameless": true,
     "transparent": true,
     "winCtrlQ": false,
     "disableMinSize": false,
@@ -174,7 +174,7 @@
             "enabled": false
         },
         "FavoriteGifSearch": {
-            "enabled": false
+            "enabled": true
         },
         "FixCodeblockGap": {
             "enabled": false
@@ -186,7 +186,7 @@
             "enabled": false
         },
         "FixYoutubeEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "ForceOwnerCrown": {
             "enabled": false
@@ -228,7 +228,14 @@
             "enabled": false
         },
         "ImageZoom": {
-            "enabled": false
+            "enabled": true,
+            "size": 100,
+            "zoom": 5.6,
+            "nearestNeighbour": false,
+            "square": false,
+            "invertScroll": true,
+            "zoomSpeed": 0.5,
+            "saveZoomValues": true
         },
         "ImplicitRelationships": {
             "enabled": false
@@ -342,7 +349,7 @@
             "enabled": false
         },
         "PictureInPicture": {
-            "enabled": false
+            "enabled": true
         },
         "PinDMs": {
             "enabled": false
@@ -543,6 +550,9 @@
         },
         "CustomCommands": {
             "enabled": false
+        },
+        "NoDefaultHangStatus": {
+            "enabled": false
         }
     },
     "uiElements": {
@@ -559,6 +569,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1773438502402
+        "settingsSyncVersion": 1774735922173
     }
 }

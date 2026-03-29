@@ -9,19 +9,19 @@
 	--app-radius: 8px;
 
 	/* BASE SURFACE */
-	--main-rgb: rgb(17, 20, 14);
+	--main-rgb: rgb(17, 19, 24);
 
 	/* ACCENT */
-	--accent-hsl: hsl(76, 17%, 87%);
+	--accent-hsl: hsl(232, 15%, 90%);
 	--accent-opacity: 1;
-	--accent-text-color: hsl(96, 83%, 12%);
+	--accent-text-color: hsl(212, 88%, 20%);
  
 
     /* ALERT HSL AND TEXT COLOR SETTINGS */
   --alert-hue: 359;
   --alert-saturation: 66.7%;
   --alert-lightness: 54.1%;
-  --alert-hsl: hsl(179, 56%, 83%);
+  --alert-hsl: hsl(291, 95%, 92%);
   --alert-opacity: 1;
  
     /* TOOLTIP */
@@ -37,42 +37,42 @@
 	--main-content-color: rgba(var(--main-rgb), 0.2);
 
 	/* MESSAGE SETTINGS */
-	--message-color: hsla(90, 18%, 7%, 1);
+	--message-color: hsla(223, 17%, 8%, 1);
 	--message-radius: 8px;
 	--message-padding-top: 8px;
 	--message-padding-side: 8px;
 
 	/* REPLY */
-	--reply-hsl: hsl(90, 21%, 74%);
+	--reply-hsl: hsl(221, 31%, 80%);
 	--reply-opacity: 1;
 
 	/* TEXTAREA */
-	--textarea-color: rgb(17, 20, 14);
+	--textarea-color: rgb(17, 19, 24);
 	--textarea-alpha: 0.1;
 	--textarea-alpha-focus: 0.15;
-	--textarea-text-color: hsl(76, 17%, 87%);
+	--textarea-text-color: hsl(232, 15%, 90%);
 	--textarea-radius: 22px;
 
 	/* CARDS */
-	--card-color: hsla(90, 7%, 26%, 1);
-	--card-color-hover: hsla(90, 7%, 26%, 1);
-	--card-color-select: hsla(90, 7%, 26%, 1);
+	--card-color: hsla(218, 8%, 28%, 1);
+	--card-color-hover: hsla(218, 8%, 28%, 1);
+	--card-color-select: hsla(218, 8%, 28%, 1);
 
 	/* BUTTONS */
 	--button-height: 32px;
 	--button-padding: 0 16px;
 	/* Main button base color (solid, high-contrast) */
-    --button-color: hsl(94, 43%, 69%) !important;
+    --button-color: hsl(218, 100%, 83%) !important;
 
 /* Hover / active tint */
-    --button-action-color: rgb(172, 210, 143)CC !important;
+    --button-action-color: rgb(168, 200, 255)CC !important;
 
 /* Button text color (solid) */
-    --button-text-color: rgb(25, 55, 5) !important;
+    --button-text-color: rgb(6, 48, 95) !important;
 
 /* Optional: fallback background for legacy buttons */
-    --button-background-color: rgba(172, 210, 143, 1);
-    --button-background-hover-color: rgba(172, 210, 143, 1)CC;
+    --button-background-color: rgba(168, 200, 255, 1);
+    --button-background-hover-color: rgba(168, 200, 255, 1)CC;
     --button-radius: 16px;
 }
 
@@ -116,19 +116,19 @@
 
 
 .button_e131a9, .buttonSection__1405b, .circleIconButton__5bc7e, .iconBadge__650eb {
-    background-color: rgb(172, 210, 143) !important; /* Button background */
-    color: rgb(172, 210, 143);       !important; /* Text/Icon color */
+    background-color: rgb(168, 200, 255) !important; /* Button background */
+    color: rgb(168, 200, 255);       !important; /* Text/Icon color */
    
 }
 
 .childWrapper__6e9f8 {
-    background-color: rgb(172, 210, 143) !important; /* Button background */
-    color: rgb(172, 210, 143);       !important;
+    background-color: rgb(168, 200, 255) !important; /* Button background */
+    color: rgb(168, 200, 255);       !important;
 }
 
 .tooltip_c36707, .tooltip__4e35b {
-    background-color: hsl(94, 43%, 69%) !important;
-    color: hsl(96, 83%, 12%) !important;
+    background-color: hsl(218, 100%, 83%) !important;
+    color: hsl(212, 88%, 20%) !important;
 }
 
 
