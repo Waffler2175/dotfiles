@@ -1,12 +1,19 @@
+/*
+# Merged Rofi Config
+# Base: Config 2 (Material You, vertical layout)
+# Borders influenced by hyprland.conf
+# Single mode: drun only
+*/
+
 configuration {
     modi:                       "drun";
-    show-icons:                 false;
+    show-icons:                 true;
     display-drun:               " ";
-    display-run:                "";
-    display-filebrowser:        "";
-    display-window:             "";
     drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    window-format:              "{w} · {c} · {t}";
+    hover-select:               false;
+    scroll-method:              1;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
 }
 
 @import "rofi-colors.rasi"
@@ -49,8 +56,8 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      2px solid;
-    border-radius:               8px;
+    border:                      1px solid;
+    border-radius:               10px;
     border-color:                @border-colour;
     cursor:                      "default";
     background-color:            @background-colour;
@@ -58,23 +65,23 @@ window {
 
 mainbox {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     0px;
     margin:                      0px;
-    padding:                     10px;
+    padding:                     0px;
     border:                      0px solid;
-    border-radius:               0px 0px 0px 0px;
+    border-radius:               0px;
     border-color:                @border-colour;
-    background-color:            transparent;
-    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+    background-color:            @background-colour;
+    children:                    [ "inputbar", "message", "listview" ];
 }
 
 inputbar {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     10px;
+    padding:                     12px 14px;
     border:                      0px 0px 1px 0px;
-    border-radius:               0px;
+    border-radius:               10px 10px 0px 0px;
     border-color:                @border-colour;
     background-color:            @alternate-background;
     text-color:                  @foreground-colour;
@@ -86,6 +93,7 @@ prompt {
     background-color:            inherit;
     text-color:                  inherit;
 }
+
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
@@ -93,6 +101,7 @@ textbox-prompt-colon {
     background-color:            inherit;
     text-color:                  inherit;
 }
+
 entry {
     enabled:                     true;
     background-color:            inherit;
@@ -113,17 +122,17 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-
-    spacing:                     0px;
+    spacing:                     4px;
     margin:                      0px;
-    padding:                     0px;
+    padding:                     8px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               0px 0px 10px 10px;
     border-color:                @border-colour;
-    background-color:            transparent;
+    background-color:            @background-colour;
     text-color:                  @foreground-colour;
     cursor:                      "default";
 }
+
 scrollbar {
     handle-width:                5px;
     handle-color:                @handle-colour;
@@ -137,12 +146,13 @@ element {
     margin:                      0px;
     padding:                     10px;
     border:                      0px solid;
-    border-radius:               4px;
+    border-radius:               10px;
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
     cursor:                      pointer;
 }
+
 element normal.normal {
     background-color:            var(normal-background);
     text-color:                  var(normal-foreground);
@@ -179,12 +189,14 @@ element alternate.active {
     background-color:            var(alternate-active-background);
     text-color:                  var(alternate-active-foreground);
 }
+
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
     size:                        24px;
     cursor:                      inherit;
 }
+
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
@@ -194,9 +206,8 @@ element-text {
     horizontal-align:            0.0;
 }
 
-mode-switcher {
+message {
     enabled:                     true;
-    spacing:                     10px;
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
@@ -205,30 +216,7 @@ mode-switcher {
     background-color:            transparent;
     text-color:                  @foreground-colour;
 }
-button {
-    padding:                     10px;
-    border:                      0px solid;
-    border-radius:               4px;
-    border-color:                @border-colour;
-    background-color:            @alternate-background;
-    text-color:                  inherit;
-    cursor:                      pointer;
-}
-button selected {
-    background-color:            var(selected-normal-background);
-    text-color:                  var(selected-normal-foreground);
-}
 
-message {
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px 0px 0px 0px;
-    border-color:                @border-colour;
-    background-color:            transparent;
-    text-color:                  @foreground-colour;
-}
 textbox {
     padding:                     10px;
     border:                      0px solid;
@@ -243,6 +231,7 @@ textbox {
     blink:                       true;
     markup:                      true;
 }
+
 error-message {
     padding:                     10px;
     border:                      0px solid;

@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 [ "$#" -eq 0 ] && exit 1
 
 while :; do
@@ -9,10 +7,10 @@ while :; do
     fi
     sleep 1
 done
-
+sleep 2
 
 for prog in "$@"; do
-    sh -c "$prog" >/dev/null 2>&1 &
+    hyprctl dispatch exec "$prog" >/dev/null 2>&1
 done
 
 exit 0
