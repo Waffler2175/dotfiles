@@ -42,12 +42,12 @@ window {
     width:                       1600px;
     x-offset:                    0px;
     y-offset:                    0px;
-
+    font:                        "JetBrainsMono Nerd Font 12";  /* added */
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      2px solid;
-    border-radius:               8px;
+    border:                      1px solid;                     /* was 2px */
+    border-radius:               10px;                          /* was 8px */
     border-color:                @border-colour;
     cursor:                      "default";
     background-color:            @background-colour;
@@ -55,9 +55,9 @@ window {
 
 mainbox {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     0px;                           /* was 10px */
     margin:                      0px;
-    padding:                     10px;
+    padding:                     0px;                           /* was 10px */
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @border-colour;
@@ -69,9 +69,9 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     10px;
+    padding:                     12px 14px;                     /* was 10px */
     border:                      0px 0px 1px 0px;
-    border-radius:               0px;
+    border-radius:               10px 10px 0px 0px;             /* was 0px */
     border-color:                @border-colour;
     background-color:            @alternate-background;
     text-color:                  @foreground-colour;
@@ -88,7 +88,7 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search wallpapers...";
+    placeholder:                 "";
     placeholder-color:           inherit;
 }
 
@@ -103,12 +103,11 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-
     spacing:                     10px;
     margin:                      0px;
-    padding:                     0px;
+    padding:                     8px;                           /* matched drun */
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               0px 0px 10px 10px;             /* matched drun */
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
@@ -121,7 +120,7 @@ element {
     margin:                      0px;
     padding:                     10px;
     border:                      0px solid;
-    border-radius:               4px;
+    border-radius:               10px;                          /* was 4px */
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
@@ -144,7 +143,7 @@ element-icon {
     background-color:            transparent;
     size:                        150px;
     cursor:                      inherit;
-    border-radius:               4px;
+    border-radius:               10px;                          /* was 4px */
 }
 element-text {
     background-color:            transparent;
@@ -160,6 +159,7 @@ message {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
+    border-radius:               0px;
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
