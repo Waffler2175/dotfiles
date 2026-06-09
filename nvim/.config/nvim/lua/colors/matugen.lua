@@ -6,22 +6,22 @@ local function apply_colors()
         vim.cmd('syntax reset')
     end
     require('base16-colorscheme').setup {
-        base00 = '{{colors.surface.default.hex}}',
-        base01 = '{{colors.surface_container_low.default.hex}}',
-        base02 = '{{colors.surface_container_highest.default.hex}}',
-        base03 = '{{colors.outline.default.hex}}',
-        base04 = '{{colors.on_surface_variant.default.hex}}',
-        base05 = '{{colors.on_surface.default.hex}}',
-        base06 = '{{colors.on_surface.default.hex}}',
-        base07 = '{{colors.inverse_on_surface.default.hex}}',
-        base08 = '{{colors.error.default.hex}}',
-        base09 = '{{colors.tertiary.default.hex}}',
-        base0A = '{{colors.secondary.default.hex}}',
-        base0B = '{{colors.primary.default.hex}}',
-        base0C = '{{colors.tertiary_fixed_dim.default.hex}}',
-        base0D = '{{colors.primary_fixed_dim.default.hex}}',
-        base0E = '{{colors.secondary_fixed_dim.default.hex}}',
-        base0F = '{{colors.error_container.default.hex}}',
+        base00 = '#111318',
+        base01 = '#191c20',
+        base02 = '#33353a',
+        base03 = '#8e9099',
+        base04 = '#c4c6cf',
+        base05 = '#e1e2e9',
+        base06 = '#e1e2e9',
+        base07 = '#2e3035',
+        base08 = '#ffb4ab',
+        base09 = '#dbbce1',
+        base0A = '#bdc7dc',
+        base0B = '#a8c8ff',
+        base0C = '#dbbce1',
+        base0D = '#a8c8ff',
+        base0E = '#bdc7dc',
+        base0F = '#93000a',
     }
     -- Fire ColorScheme event so transparent.nvim re-applies itself naturally
     vim.api.nvim_exec_autocmds("ColorScheme", { pattern = "base16" })

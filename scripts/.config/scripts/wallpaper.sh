@@ -1,75 +1,99 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Directories
 WALLPAPER_DIR="$HOME/wallpaper"
 CACHE_DIR="$HOME/.cache/blurred-wallpaper"
 CURRENT_LINK="$WALLPAPER_DIR/wallpaper.png"
-HYPRPAPER_CONF="$HOME/.config/hypr/hyprpaper.conf"
+MATUGEN_JSON="$HOME/.config/matugen/colors.json"
+ROFI_RASI_DIR="$HOME/.cache/ml4w/hyprland-dotfiles"   # ADD
 BLUR="50x30"
 RESIZE="75%"
 
-command -v hyprpaper >/dev/null 2>&1 || exit 0
-command -v magick    >/dev/null 2>&1 || exit 0
-command -v matugen   >/dev/null 2>&1 || exit 0
+# ── Dependency Check ──────────────────────────────────────────────────────────
+for cmd in awww magick matugen pywalfox; do
+    command -v "$cmd" >/dev/null 2>&1 || { echo "$cmd not found"; exit 1; }
+done
 
 mkdir -p "$CACHE_DIR"
+mkdir -p "$ROFI_RASI_DIR"   # ADD
 
-if [ -L "$CURRENT_LINK" ]; then
+# ── Daemon ────────────────────────────────────────────────────────────────────
+if ! pgrep -x "awww-daemon" > /dev/null; then
+    swww-daemon &
+    sleep 1
+fi
+
+# ── Wallpaper Selection ───────────────────────────────────────────────────────
+if [ -L "$CURRENT_LINK" ] && [ -e "$CURRENT_LINK" ]; then
     WALLPAPER="$(readlink -f "$CURRENT_LINK")"
 else
     WALLPAPER="$(find "$WALLPAPER_DIR" -type f \
         \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.webp' \) \
-        ! -name 'wallpaper.png' \
-        | shuf -n 1)"
+        ! -name 'wallpaper.png' | shuf -n 1)"
     ln -sf "$WALLPAPER" "$CURRENT_LINK"
 fi
 
-[ -f "$WALLPAPER" ] || exit 0
-
-# Wait for Hyprland to report at least one monitor
-MONITORS=""
-for i in $(seq 1 10); do
-    MONITORS=$(hyprctl monitors 2>/dev/null | awk '/Monitor/{print $2}')
-    [ -n "$MONITORS" ] && break
-    sleep 0.01
-done
-[ -z "$MONITORS" ] && exit 1
-
-# Run matugen and blur in parallel while hyprpaper restarts
-matugen --source-color-index 0 image "$WALLPAPER" &
-MATUGEN_PID=$!
-
-HASH="$(sha256sum "$WALLPAPER" | awk '{print $1}')"
-BLURRED="$CACHE_DIR/$HASH.png"
-if [ ! -f "$BLURRED" ]; then
-    magick "$WALLPAPER" -resize "$RESIZE" -blur "$BLUR" "$BLURRED" &
-fi
-
-WALLPAPER_LINES=""
-for MON in $MONITORS; do
-    WALLPAPER_LINES+="wallpaper = $MON,$WALLPAPER"$'\n'
-done
-
-cat > "$HYPRPAPER_CONF" <<EOF
-preload = $WALLPAPER
-$WALLPAPER_LINES
-splash = false
+# ── Rofi Wallpaper RASI ───────────────────────────────────────────────────────
+# ADD: write current wallpaper path into a rasi variable for rofi themes
+cat > "$ROFI_RASI_DIR/current_wallpaper.rasi" <<EOF
+* {
+    current-image: url("$WALLPAPER", width);
+}
 EOF
 
-pkill hyprpaper || true
-hyprpaper -c "$HYPRPAPER_CONF" & disown
+# ── Matugen ───────────────────────────────────────────────────────────────────
+matugen image "$WALLPAPER" --source-color-index 0
 
-# Wait for hyprpaper to finish loading the wallpaper
-for i in $(seq 1 10); do
-    hyprctl hyprpaper listloaded 2>/dev/null | grep -q "$WALLPAPER" && break
-    sleep 0.01
-done
+# ── GTK3 Reload ───────────────────────────────────────────────────────────────
+_gtk3_reload() {
+    local current
+    current=$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d "'")
+    gsettings set org.gnome.desktop.interface gtk-theme "default"
+    sleep 0.05
+    gsettings set org.gnome.desktop.interface gtk-theme "$current"
+}
+_gtk3_reload &
 
-for MON in $MONITORS; do
-    hyprctl hyprpaper wallpaper "$MON,$WALLPAPER"
-done
+# ── GTK4 / libadwaita Reload ──────────────────────────────────────────────────
+_gtk4_reload() {
+    local current
+    current=$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")
+    local opposite
+    [[ "$current" == "prefer-dark" ]] && opposite="prefer-light" || opposite="prefer-dark"
+    gsettings set org.gnome.desktop.interface color-scheme "$opposite"
+    sleep 0.05
+    gsettings set org.gnome.desktop.interface color-scheme "$current"
+}
+_gtk4_reload &
 
-ln -sf "$BLURRED" "$CACHE_DIR/current.png"
-wait $MATUGEN_PID
+# ── Firefox (pywalfox) ────────────────────────────────────────────────────────
+if command -v pywalfox >/dev/null 2>&1; then
+    pywalfox update
+fi
+
+# ── Neovim ────────────────────────────────────────────────────────────────────
+if [ -f "$MATUGEN_JSON" ]; then
+    touch "$MATUGEN_JSON"
+fi
+
+# ── Blurred Wallpaper (background) ───────────────────────────────────────────
+HASH="$(sha256sum "$WALLPAPER" | awk '{print $1}')"
+BLURRED="$CACHE_DIR/$HASH.png"
+
+ln -sf "$WALLPAPER" "$CACHE_DIR/currentnb"
+
+if [ ! -f "$BLURRED" ]; then
+    (
+        magick "$WALLPAPER" -resize "$RESIZE" -blur "$BLUR" "$BLURRED"
+        ln -sf "$BLURRED" "$CACHE_DIR/current.png"
+    ) &
+else
+    ln -sf "$BLURRED" "$CACHE_DIR/current.png"
+fi
+
+# ── Apply Wallpaper ───────────────────────────────────────────────────────────
+awww img "$WALLPAPER" --transition-type simple --transition-step 50
+
+# ── Reload UI ─────────────────────────────────────────────────────────────────
 ~/.config/hypr/waybar-refresh.sh &
-exit 0
